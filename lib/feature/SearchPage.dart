@@ -15,6 +15,20 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController(); // 검색어 입력 관리
   int totalCount = 2115; // 검색 결과 총 인원수
 
+  // 검색 결과를 담을 리스트 데이터 추가
+  final List<Map<String, dynamic>> searchResults = [
+    {
+      'position': '총동창회장',
+      'name': '권은진',
+      'period': '20기',
+      'major': '경영',
+      'company': '(주)성조파인세라믹대표이사',
+      'phone': '010-****-****',
+      'imageUrl': 'assets/profile_placeholder.png'  // 프로필 이미지 경로
+    },
+    // 데이터 추가
+  ];
+
   @override
   void dispose() {
     _searchController.dispose();
@@ -141,10 +155,11 @@ class _SearchPageState extends State<SearchPage> {
           Expanded(
             child: Container(
               color: Colors.white,
-              // ListView.builder를 사용하여 검색 결과 목록 생성
               child: ListView.builder(
-                itemCount: 1, // 데이터 개수
+                itemCount: searchResults.length,  // 데이터 리스트의 길이만큼 표시
                 itemBuilder: (context, index) {
+                  final result = searchResults[index];  // 현재 인덱스의 데이터
+
                   return Container(
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
@@ -163,8 +178,8 @@ class _SearchPageState extends State<SearchPage> {
                           height: 80,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/profile_placeholder.png'), // 프로필 이미지 에셋 경로
+                            image: DecorationImage(
+                              image: AssetImage(result['imageUrl']),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -175,20 +190,19 @@ class _SearchPageState extends State<SearchPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // 직위와 이름, 기수
                               Row(
                                 children: [
-                                  const Text(
-                                    '총동창회장',
-                                    style: TextStyle(
+                                  Text(
+                                    result['position'],
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   const SizedBox(width: 8),
-                                  const Text(
-                                    '권은진',
-                                    style: TextStyle(
+                                  Text(
+                                    result['name'],
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -203,9 +217,9 @@ class _SearchPageState extends State<SearchPage> {
                                       color: Colors.blue,
                                       borderRadius: BorderRadius.circular(12),
                                     ),
-                                    child: const Text(
-                                      '20기',
-                                      style: TextStyle(
+                                    child: Text(
+                                      result['period'],
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 12,
                                       ),
@@ -214,19 +228,17 @@ class _SearchPageState extends State<SearchPage> {
                                 ],
                               ),
                               const SizedBox(height: 4),
-                              // 전공
-                              const Text(
-                                '경영',
+                              Text(
+                                result['major'],
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  color: Colors.grey[600],
                                   fontSize: 14,
                                 ),
                               ),
                               const SizedBox(height: 4),
-                              // 회사 정보
-                              const Text(
-                                '(주)성조파인세라믹대표이사',
-                                style: TextStyle(
+                              Text(
+                                result['company'],
+                                style: const TextStyle(
                                   fontSize: 14,
                                 ),
                               ),
@@ -240,12 +252,14 @@ class _SearchPageState extends State<SearchPage> {
                               icon: const Icon(Icons.phone),
                               onPressed: () {
                                 // 전화 걸기 기능 구현
+                                print('Call: ${result['phone']}');
                               },
                             ),
                             IconButton(
                               icon: const Icon(Icons.article_outlined),
                               onPressed: () {
                                 // 상세 정보 보기 기능 구현
+                                print('View details for: ${result['name']}');
                               },
                             ),
                           ],
