@@ -136,11 +136,124 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           // 4. 검색 결과 리스트 표시 영역
+          // 아래 코드를 Expanded 위젯 부분에 추가
+// 4. 검색 결과 리스트 표시 영역
           Expanded(
             child: Container(
               color: Colors.white,
-              child: const Center(
-                child: Text('검색 결과가 여기에 표시됩니다'),
+              // ListView.builder를 사용하여 검색 결과 목록 생성
+              child: ListView.builder(
+                itemCount: 1, // 데이터 개수
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.grey.withOpacity(0.2),
+                          width: 1.0,
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        // 프로필 이미지
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: const DecorationImage(
+                              image: AssetImage('assets/profile_placeholder.png'), // 프로필 이미지 에셋 경로
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        // 회원 정보
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // 직위와 이름, 기수
+                              Row(
+                                children: [
+                                  const Text(
+                                    '총동창회장',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  const Text(
+                                    '권은진',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: const Text(
+                                      '20기',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              // 전공
+                              const Text(
+                                '경영',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              // 회사 정보
+                              const Text(
+                                '(주)성조파인세라믹대표이사',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // 연락처 아이콘
+                        Column(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.phone),
+                              onPressed: () {
+                                // 전화 걸기 기능 구현
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.article_outlined),
+                              onPressed: () {
+                                // 상세 정보 보기 기능 구현
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
           ),

@@ -168,7 +168,7 @@ class _CommunityPageState extends State<CommunityPage> {
   }
 }
 
-// 상단 네비게이션바 - '공지사항', '자유게시판', '자유앨범'
+// 2-1. 상단 네비게이션바 - '공지사항', '자유게시판', '자유앨범'
 class TopNavigationBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemTapped;
@@ -232,23 +232,130 @@ class TopNavigationBar extends StatelessWidget {
   }
 }
 
-// 상단 네비게이션바 누르면 이동하는 위젯
+// 3. 상단 네비게이션바 누르면 이동하는 위젯
 
-// 1. 공지사항
+// 3-1. 공지사항 -> 게시물 형태 표시하는 리스트
 class NoticesContent extends StatelessWidget {
   const NoticesContent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // 게시물 데이터
+    final List<Map<String, dynamic>> noticeItems = [
+      {
+        'title': '대구 가톨릭 대학교 미래지식포럼 제 14회 총동창회장배 본교총장배 한마당 골프대회',
+        'author': '관리자',
+        'date': '2024/10/28',
+        'time': '18:14',
+        'views': 59,
+        'comments': 0,
+      },
+      // 데이터 추가
+    ];
+
     return Container(
-      color: Colors.white,
-      child: const Center(
-        child: Text('공지사항 내용'),
+      color: Colors.white, // 전체 배경은 흰색으로
+      // ListView.builder를 사용하여 게시물 목록 생성 -> 스크롤 가능한 리스트
+      child: ListView.builder(
+        itemCount: noticeItems.length, // 전체 게시물 수 지정
+        itemBuilder: (context, index) { // 각 게시물 구성 함수
+          final item = noticeItems[index];
+        // 개별 게시물 구조
+          return Container( // 각 게시물을 감싸는 컨테이너
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide( // 하단에 구분선
+                  color: Colors.grey.withOpacity(0.2),
+                  width: 1.0,
+                ),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 3-1-1. 게시물 제목
+                  Text(
+                    item['title'],
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    maxLines: 2, // 최대 2줄까지만 표시
+                    overflow: TextOverflow.ellipsis, // 넘치는 텍스트는 ...으로 표시
+                  ),
+                  const SizedBox(height: 8),
+                  // 3-1-2. 게시물 정보 (작성자, 날짜, 시간, 조회수, 댓글수)
+                  Row( // 가로 배치
+                    children: [
+                      // 작성자
+                      Text(
+                        item['author'],
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      // 날짜, 시간
+                      Text(
+                        '${item['date']} ${item['time']}',
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 14,
+                        ),
+                      ),
+                      const Spacer(), // 중간 공간 채움
+                      // 조회수
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.remove_red_eye_outlined,
+                            size: 16,
+                            color: Colors.grey[600],
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            '${item['views']}',
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(width: 8),
+                      // 댓글수
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.chat_bubble_outline,
+                            size: 16,
+                            color: Colors.grey[600],
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            '${item['comments']}',
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 }
-// 2. 자유게시판
+// 3-2. 자유게시판
 class FreeBoardContent extends StatelessWidget {
   const FreeBoardContent({super.key});
 
@@ -262,7 +369,7 @@ class FreeBoardContent extends StatelessWidget {
     );
   }
 }
-// 3. 자유앨범
+// 3-3. 자유앨범
 class FreeAlbumContent extends StatelessWidget {
   const FreeAlbumContent({super.key});
 
