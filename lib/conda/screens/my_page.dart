@@ -15,6 +15,7 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(onPressed: () {
           Navigator.pop(context);
@@ -30,7 +31,7 @@ class _MyPageState extends State<MyPage> {
                     top: BorderSide(color: Colors.grey, width: 1),
                     bottom: BorderSide(color: Colors.grey, width: 1),
                   ),
-                  color: Colors.grey),
+                  color: Color(0xffeeeeee)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -38,13 +39,13 @@ class _MyPageState extends State<MyPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.face, size: 30),
+                        child: Icon(Icons.face, size: 35),
                       ),
                       SizedBox(width: 8),
                       Text('이름 들어갈 곳',
                           style: TextStyle(
-                              color: Colors.indigoAccent,
-                              fontWeight: FontWeight.bold)),
+                              color: Color(0xff2F3FA3),
+                              fontWeight: FontWeight.bold, fontSize: 18.0)),
                     ],
                   ),
                   Padding(
@@ -60,7 +61,6 @@ class _MyPageState extends State<MyPage> {
             Container(
               decoration: BoxDecoration(
                 border: Border(
-                  top: BorderSide(color: Colors.grey, width: 1),
                   bottom: BorderSide(color: Colors.grey, width: 1),
                 ),
               ),
@@ -68,22 +68,25 @@ class _MyPageState extends State<MyPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(25.0),
                     child: Text(
                       '메시지 도착 알림 설정',
                       style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 18),
+                          fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                   ),
-                  CupertinoSwitch(
-                    value: _isChecked,
-                    activeTrackColor: CupertinoColors.inactiveGray,
-                    thumbColor: CupertinoColors.activeBlue,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _isChecked = value ?? false;
-                      });
-                    },
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CupertinoSwitch(
+                      value: _isChecked,
+                      activeTrackColor: Color(0xffDEEFFF),
+                      thumbColor: _isChecked ? Color(0xff2F3FA3) : Colors.grey,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _isChecked = value ?? false;
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -92,7 +95,7 @@ class _MyPageState extends State<MyPage> {
               padding: const EdgeInsets.all(15.0),
             child: OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.fromLTRB(110.0,20.0,110.0,20.0),
+                  padding: const EdgeInsets.fromLTRB(124.0,20.0,124.0,20.0),
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   )

@@ -60,14 +60,14 @@ class CustomNavigationBar extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: isSelected ? Colors.indigoAccent : Colors.grey,
+                color: isSelected ? Color(0xff2F3FA3) : Colors.grey,
                 size: 20,
               ),
               const SizedBox(height: 5),
               Text(
                 label,
                 style: TextStyle(
-                  color: isSelected ? Colors.indigoAccent : Colors.grey,
+                  color: isSelected ? Color(0xff2F3FA3) : Colors.grey,
                   fontSize: 13,
                   fontWeight: FontWeight.w900
                 ),
