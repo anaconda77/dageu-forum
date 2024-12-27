@@ -32,9 +32,9 @@ class CustomNavigationBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildNavItem(0, Icons.home, '홈'),
-                _buildNavItem(1, Icons.document_scanner, '소개'),
+                _buildNavItem(1, Icons.newspaper, '소개'),
                 _buildNavItem(2, Icons.search, '회원검색'),
-                _buildNavItem(3, Icons.list, '커뮤니티'),
+                _buildNavItem(3, Icons.comment, '커뮤니티'),
               ],
             ),
           )),
@@ -60,7 +60,7 @@ class CustomNavigationBar extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: Colors.grey,
+                color: isSelected ? Colors.indigoAccent : Colors.grey,
                 size: 20,
               ),
               const SizedBox(height: 5),
