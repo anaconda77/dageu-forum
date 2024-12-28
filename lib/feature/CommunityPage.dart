@@ -260,7 +260,7 @@ class NoticesContent extends StatelessWidget {
         itemCount: noticeItems.length, // 전체 게시물 수 지정
         itemBuilder: (context, index) { // 각 게시물 구성 함수
           final item = noticeItems[index];
-        // 개별 게시물 구조
+          // 개별 게시물 구조
           return Container( // 각 게시물을 감싸는 컨테이너
             decoration: BoxDecoration(
               border: Border(

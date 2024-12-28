@@ -95,7 +95,7 @@ class TopNavigationBar extends StatelessWidget {
       ),
     );
   }
- // 버튼 생성
+  // 버튼 생성
   Widget _buildNavButton(BuildContext context, String title, int index) {
     final isSelected = selectedIndex == index;
 
